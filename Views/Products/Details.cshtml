@@ -1,0 +1,95 @@
+﻿@model E_Market.Models.Product
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<section class="container my-5 py-5 px-0">
+    <div style="background-color :#eee" class="row align-items-center px-0">
+        <div class="col-md-6">
+            <img class="img-fluid" src="@Url.Content(Model.image)" />
+        </div>
+        <div class="col-md-6 ">
+            <h3>@Html.DisplayFor(model => model.name)</h3>
+            <h5 class="text-muted">$ @Html.DisplayFor(model => model.price)</h5>
+            <span class="font-italic">phones</span>
+            <p class="text-dark">
+                @Html.DisplayFor(model => model.description)
+            </p>
+            <a class="btn btn-outline-success" href="@Url.Action("Edit", "Products", new { id = Model.Id })">Update</a>
+            <a class="btn btn-danger" href="@Url.Action("Delete", "Products", new { id = Model.Id })">Delete</a>
+        </div>
+    </div>
+
+</section>
+
+
+<div>
+    <a class="btn btn-dark p-3 rounded" href="@Url.Action("Index" , "Products")">Back To Products</a>
+</div>
+
+@*@{
+        ViewBag.Title = "Details";
+    }
+
+    <h2>Details</h2>
+
+    <div>
+        <h4>Product</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.price)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.price)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.image)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.image)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.description)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.description)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Category.name)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Category.name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Cart.product_id)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Cart.product_id)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>*@

@@ -1,0 +1,147 @@
+﻿@model IEnumerable<E_Market.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+
+
+
+<script>
+    $(function () {
+        $("#txtsearch").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: " @Url.Action("GetCategoryName","Products")",
+                    dataType: "json",
+                    data: { term: $("#txtsearch").val() },
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return item;
+                        }))
+                    },
+
+                });
+            }
+        });
+    });
+</script>
+
+
+
+
+<div class="container">
+    <div class="row my-2 justify-content-center">
+        <div class="col-md-6 my-5">
+            @using (@Html.BeginForm("index", "products", FormMethod.Post, new { @class = "" }))
+            {
+                <div class="input-group" style="width : 100% ">
+                    @Html.TextBox("searchTerm", null, new { @class = "form-controll mx-3", id = "txtsearch" })
+                    <button type="submit" class="search btn btn-outline-success form-control" style="">Filter</button>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="row justify-content-center text-center mb-3">
+        <div class="col-md-6">
+            <a class="btn btn-info" href="@Url.Action("Create" , "Products")">Add New Product</a>
+        </div>
+    </div>
+
+    <div class="row bg-light shadow-lg">
+
+        @foreach (var item in Model)
+        {
+        <div class="col-6 col-sm-6 col-md-4 col-lg-2 mt-3 py-5">
+            <div class="card shadow">
+              
+                <img class="card-img" src="@Url.Content(item.image)" alt="Vans">
+                
+
+
+                <div class="card-body">
+                    <h6 class="card-title">@Html.DisplayFor(modelItem => item.name)</h6>
+                    <h6 class="card-subtitle  text-muted">@Html.DisplayFor(modelItem => item.Category.name) </h6>
+
+                    <div class="buy  justify-content-between align-items-center">
+                        <div class="price text-success"><h6 class="mt-4">$@Html.DisplayFor(modelItem => item.price)</h6></div>
+
+
+                    </div>
+                </div>
+                <div class="card-footer" style="box-sizing: unset">
+                    <a href="@Url.Action("Details", "Products", new { id = item.Id })" class="btn-sm btn-success">Details</a>
+
+                </div>
+                <div class="card-footer" style="box-sizing: unset">
+                    <a href="@Url.Action("AddToCart", "Products", new { id = item.Id })" class="btn-sm btn-danger">Add to Cart</a>
+
+                </div>
+            </div>
+        </div>
+        }
+        </div>
+</div>
+
+
+
+
+@*<h2>Index</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.image)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category.name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cart.product_id)
+            </th>
+            <th></th>
+        </tr>
+
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.image)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cart.product_id)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            </td>
+        </tr>
+    }
+
+    </table>*@
